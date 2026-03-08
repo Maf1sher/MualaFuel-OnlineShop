@@ -21,6 +21,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Run ls
+      # Komenda 'test' uruchamia tylko fazę testów (pomija budowanie pliku .jar)
+      run: ls -l
+      
     - name: Run Unit Tests with Maven
       # Komenda 'test' uruchamia tylko fazę testów (pomija budowanie pliku .jar)
       run: mvn test
