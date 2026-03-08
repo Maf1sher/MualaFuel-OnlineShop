@@ -23,7 +23,7 @@ jobs:
 
     - name: Run Unit Tests with Maven
       # Komenda 'test' uruchamia tylko fazę testów (pomija budowanie pliku .jar)
-      run: mvn -B test --file pom.xml
+      run: mvn test
 
     - name: Upload Test Reports
       # if: always() gwarantuje, że raporty z testów zostaną przesłane, 
