@@ -20,14 +20,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-
-    - name: Run ls
-      # Komenda 'test' uruchamia tylko fazę testów (pomija budowanie pliku .jar)
-      run: ls -l
       
     - name: Run Unit Tests with Maven
       # Komenda 'test' uruchamia tylko fazę testów (pomija budowanie pliku .jar)
-      run: mvn test
+      run: cd MualaFuel-Backend && mvn -B test
 
     - name: Upload Test Reports
       # if: always() gwarantuje, że raporty z testów zostaną przesłane, 
