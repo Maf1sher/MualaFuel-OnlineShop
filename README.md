@@ -1,5 +1,13 @@
 # MualaFuel - Online Store
 
+Nazwa zespołu: Piwkodziarze
+Skład zespołu:
+- Mateusz Lengiewicz
+- Gabriel Charkiewicz
+- Szymon Bartkowiak
+- Jakub Laskowski (lider)
+- Mateusz Strapczuk
+
 ## General project requirements:
 
 - Data stored in a relational database.
