@@ -1,5 +1,6 @@
 package com.example.MualaFuel_Backend.service.impl;
 
+import com.example.MualaFuel_Backend.dao.ProductDao;
 import com.example.MualaFuel_Backend.dao.ProductDaoImpl;
 import com.example.MualaFuel_Backend.dto.ProductDto;
 import com.example.MualaFuel_Backend.dto.ProductSearchDto;
@@ -23,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     @Value("${application.file.cdn}")
     private String cdn;
 
-    private final ProductDaoImpl productDao;
+    private final ProductDao productDao;
     private final Mapper<Product, ProductDto> mapper;
     private final FileStorageService fileStorageService;
 
