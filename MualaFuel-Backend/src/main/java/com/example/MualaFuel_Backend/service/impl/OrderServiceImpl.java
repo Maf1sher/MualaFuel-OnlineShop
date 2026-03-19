@@ -1,7 +1,10 @@
 package com.example.MualaFuel_Backend.service.impl;
 
+import com.example.MualaFuel_Backend.dao.OrderDao;
 import com.example.MualaFuel_Backend.dao.OrderDaoImpl;
+import com.example.MualaFuel_Backend.dao.OrderItemDao;
 import com.example.MualaFuel_Backend.dao.OrderItemDaoImpl;
+import com.example.MualaFuel_Backend.dao.ProductDao;
 import com.example.MualaFuel_Backend.dao.ProductDaoImpl;
 import com.example.MualaFuel_Backend.dao.UserDao;
 import com.example.MualaFuel_Backend.dto.OrderDto;
@@ -33,9 +36,9 @@ import static com.example.MualaFuel_Backend.enums.OrderStatus.*;
 public class OrderServiceImpl implements OrderService {
 
     private final Cart cart;
-    private final OrderDaoImpl orderRepository;
-    private final ProductDaoImpl productRepository;
-    private final OrderItemDaoImpl orderItemRepository;
+    private final OrderDao orderRepository;
+    private final ProductDao productRepository;
+    private final OrderItemDao orderItemRepository;
     private final UserDao userRepository;
     private final Mapper<Order, OrderDto> mapper;
     private final EmailService emailService;
