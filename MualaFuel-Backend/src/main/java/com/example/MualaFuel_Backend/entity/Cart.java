@@ -13,6 +13,9 @@ public class Cart {
     private final Map<Long, CartItem> items = new HashMap<>();
 
     public void addItem(Product product, int quantity) {
+        if (product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        }
         Long productId = product.getId();
 
         if (items.containsKey(productId)) {

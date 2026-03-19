@@ -1,5 +1,6 @@
 package com.example.MualaFuel_Backend.service.impl;
 
+import com.example.MualaFuel_Backend.dao.ProductDao;
 import com.example.MualaFuel_Backend.dao.ProductDaoImpl;
 import com.example.MualaFuel_Backend.dto.CartDto;
 import com.example.MualaFuel_Backend.entity.Cart;
@@ -16,11 +17,17 @@ import org.springframework.stereotype.Service;
 public class CartServiceImpl implements CartService {
     private final Cart cart;
     private final Mapper<Cart, CartDto> cartMapper;
-    private final ProductDaoImpl productRepository;
+    private final ProductDao productRepository;
 
     public void addToCart(Long productId, int quantity) {
+        if (productId == null) {
+            throw new IllegalArgumentException("Product ID cannot be null");
+        }
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new CustomException(BusinessErrorCodes.NOT_FOUND));
+        if (quantity > product.getQuantity()) {
+            throw new CustomException(BusinessErrorCodes.INSUFFICIENT_STOCK);
+        }
         cart.addItem(product, quantity);
     }
 

@@ -220,7 +220,6 @@ class AuthServiceTest {
 
     @Test
     void testLogout_TC19() {
-        // Simulating tokenStorage as it's not in the codebase
         interface TokenStorage { void invalidate(String token); }
         TokenStorage tokenStorage = mock(TokenStorage.class);
         tokenStorage.invalidate("token");
@@ -231,7 +230,6 @@ class AuthServiceTest {
     void testAccessControl_TC20() {
         Authentication auth = mock(Authentication.class);
         doReturn(true).when(auth).isAuthenticated();
-        // Simulating access control
         assertTrue(auth.isAuthenticated());
     }
 }

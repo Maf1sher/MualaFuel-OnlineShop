@@ -15,6 +15,7 @@ public enum BusinessErrorCodes{
     NOT_FOUND(305,"Not found", HttpStatus.NOT_FOUND),
     IMAGE_FETCH_FAILED(306,"Image fetch failed", HttpStatus.BAD_REQUEST),
     EMAIL_HISTORY_NOT_FOUND(307,"No EmailHistory found", HttpStatus.NOT_FOUND),
+    INSUFFICIENT_STOCK(308, "Insufficient stock", HttpStatus.BAD_REQUEST),
     ;
     @Getter
     private final int code;
