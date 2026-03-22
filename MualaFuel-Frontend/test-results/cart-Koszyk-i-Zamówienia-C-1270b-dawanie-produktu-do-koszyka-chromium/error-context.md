@@ -1,0 +1,92 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e5]:
+    - generic [ref=e6]:
+      - img "Logo" [ref=e7]
+      - paragraph [ref=e8]: MualaFuel
+    - navigation [ref=e9]:
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - link "Home" [ref=e12] [cursor=pointer]:
+            - /url: /home
+        - listitem [ref=e13]:
+          - link "Assortment" [ref=e14] [cursor=pointer]:
+            - /url: /assortment
+        - listitem [ref=e16]:
+          - link "YourOrders" [ref=e17] [cursor=pointer]:
+            - /url: /orders
+        - listitem [ref=e18]:
+          - img [ref=e19] [cursor=pointer]
+      - paragraph [ref=e23] [cursor=pointer]: Login
+  - generic [ref=e26]:
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]: Name
+        - textbox [ref=e31]
+      - generic [ref=e32]:
+        - generic [ref=e33]: Brand
+        - textbox [ref=e34]
+      - generic [ref=e35]:
+        - generic [ref=e36]: Alcohol Type
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - checkbox "Wodka" [ref=e39]
+            - generic [ref=e40]: Wodka
+          - generic [ref=e41]:
+            - checkbox "Whiskey" [ref=e42]
+            - generic [ref=e43]: Whiskey
+          - generic [ref=e44]:
+            - checkbox "Rum" [ref=e45]
+            - generic [ref=e46]: Rum
+          - generic [ref=e47]:
+            - checkbox "Gin" [ref=e48]
+            - generic [ref=e49]: Gin
+          - generic [ref=e50]:
+            - checkbox "Tequila" [ref=e51]
+            - generic [ref=e52]: Tequila
+          - generic [ref=e53]:
+            - checkbox "Wine" [ref=e54]
+            - generic [ref=e55]: Wine
+          - generic [ref=e56]:
+            - checkbox "Beer" [ref=e57]
+            - generic [ref=e58]: Beer
+          - generic [ref=e59]:
+            - checkbox "Liqueur" [ref=e60]
+            - generic [ref=e61]: Liqueur
+          - generic [ref=e62]:
+            - checkbox "Other" [ref=e63]
+            - generic [ref=e64]: Other
+      - generic [ref=e65]:
+        - generic [ref=e66]: Price
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - generic [ref=e69]: "0"
+            - generic [ref=e70]: "1000"
+          - generic [ref=e71]:
+            - slider [ref=e75]
+            - slider [ref=e76]
+      - generic [ref=e77]:
+        - generic [ref=e78]: Alcohol Content
+        - generic [ref=e79]:
+          - generic [ref=e80]:
+            - generic [ref=e81]: "0"
+            - generic [ref=e82]: "100"
+          - generic [ref=e83]:
+            - slider [ref=e87]
+            - slider [ref=e88]
+      - generic [ref=e89]:
+        - generic [ref=e90]: Capacity
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e93]: "0"
+            - generic [ref=e94]: "1000"
+          - generic [ref=e95]:
+            - slider [ref=e99]
+            - slider [ref=e100]
+      - button "Search" [ref=e102] [cursor=pointer]
+    - generic [ref=e104]:
+      - img [ref=e107]
+      - paragraph [ref=e384]: Failed to fetch
+```
