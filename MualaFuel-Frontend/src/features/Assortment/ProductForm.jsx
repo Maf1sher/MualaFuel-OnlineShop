@@ -64,6 +64,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Name</label>
                     <input
+                        data-testid="product-name-input"
                         type="text"
                         className="w-full p-2 border rounded"
                         value={name}
@@ -74,6 +75,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Brand</label>
                     <input
+                        data-testid="product-brand-input"
                         type="text"
                         className="w-full p-2 border rounded"
                         value={brand}
@@ -85,6 +87,7 @@ export function ProductForm({
             <div>
                 <label className="block text-gray-700 mb-1">Description</label>
                 <textarea
+                    data-testid="product-description-input"
                     className="w-full p-2 border rounded"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
@@ -95,6 +98,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Price</label>
                     <input
+                        data-testid="product-price-input"
                         type="number"
                         step="0.01"
                         className="w-full p-2 border rounded"
@@ -106,6 +110,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Quantity</label>
                     <input
+                        data-testid="product-quantity-input"
                         type="number"
                         className="w-full p-2 border rounded"
                         value={quantity}
@@ -118,6 +123,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Alcohol Content</label>
                     <input
+                        data-testid="product-alcohol-content-input"
                         type="number"
                         step="0.1"
                         className="w-full p-2 border rounded"
@@ -129,6 +135,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Capacity (ml)</label>
                     <input
+                        data-testid="product-capacity-input"
                         type="number"
                         className="w-full p-2 border rounded"
                         value={capacityInMilliliters}
@@ -141,6 +148,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Alcohol Type</label>
                     <select
+                        data-testid="product-alcohol-type-select"
                         className="w-full p-2 border rounded"
                         value={alcoholType}
                         onChange={(e) => setAlcoholType(e.target.value)}
@@ -157,6 +165,7 @@ export function ProductForm({
                 <div>
                     <label className="block text-gray-700 mb-1">Product Image</label>
                     <input
+                        data-testid="product-image-input"
                         type="file"
                         accept="image/*"
                         onChange={(e) => setImageFile(e.target.files[0])}
@@ -174,6 +183,7 @@ export function ProductForm({
                     </button>
                 )}
                 <button
+                    data-testid="product-form-submit-button"
                     type="submit"
                     disabled={isSubmitting}
                     className="bg-[#3E2723] hover:bg-[#4E3423] text-white px-4 py-2 rounded transition-colors"

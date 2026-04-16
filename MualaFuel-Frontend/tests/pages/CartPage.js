@@ -1,30 +1,33 @@
-export class CartPage {
+import { BasePage } from './BasePage';
+import { expect } from '@playwright/test';
+
+export class CartPage extends BasePage {
   constructor(page) {
-    this.page = page;
-    this.emptyCartMessage = page.getByText(/Your cart is currently empty/i);
-    this.checkoutButton = page.getByRole('button', { name: /Proceed to Checkout/i });
+    super(page);
+    this.checkoutButton = page.getByRole('button', { name: 'Proceed to Checkout' });
+    this.placeOrderButton = page.getByRole('button', { name: 'Place Order' });
   }
 
-  async goto() {
+  async navigate() {
     await this.page.goto('/cart');
   }
 
+  async changeQuantity(productName, increase = true) {
+    const item = this.page.locator('.bg-gray-50', { hasText: productName });
+    await item.getByRole('button', { name: increase ? '+' : '-' }).click();
+  }
+
   async removeItem(productName) {
-    const itemRow = this.page.locator('div').filter({ has: this.page.getByRole('heading', { name: productName }) });
-    await itemRow.getByRole('button', { name: /Remove/i }).click();
+    const item = this.page.locator('.bg-gray-50', { hasText: productName });
+    await item.getByRole('button', { name: 'Remove' }).click();
   }
 
-  async updateQuantity(productName, delta) {
-    const itemRow = this.page.locator('div').filter({ has: this.page.getByRole('heading', { name: productName }) });
-    const buttonLabel = delta > 0 ? '+' : '-';
-    await itemRow.getByRole('button', { name: buttonLabel }).click();
-  }
-
-  async fillCheckoutForm(details) {
-    await this.page.getByLabel('Country').fill(details.country);
-    await this.page.getByLabel('City').fill(details.city);
-    await this.page.getByLabel('Zip Code').fill(details.zipCode);
-    await this.page.getByLabel('Street Address').fill(details.street);
-    await this.page.getByRole('button', { name: /Place Order/i }).click();
+  async checkout(details) {
+    await this.checkoutButton.click();
+    await this.page.locator('label:has-text("Country") + input').fill(details.country);
+    await this.page.locator('label:has-text("City") + input').fill(details.city);
+    await this.page.locator('label:has-text("Zip Code") + input').fill(details.zipCode);
+    await this.page.locator('label:has-text("Street Address") + input').fill(details.street);
+    await this.placeOrderButton.click();
   }
 }

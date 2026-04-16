@@ -8,9 +8,12 @@ import {
 } from "../redux/CartService/Action.js";
 import Spinner from "../components/Spinner.jsx";
 import ErrorOverlay from "../components/ErrorOverlay.jsx";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Cart() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { cart, loading, error, orderPlaceSuccess, removing, updateLoading} = useSelector((state) => state.cartService);
     const [showCheckoutForm, setShowCheckoutForm] = useState(false);
     const [orderData, setOrderData] = useState({
@@ -29,6 +32,13 @@ function Cart() {
     useEffect(() => {
         dispatch(fetchCartAction());
     }, [dispatch, removing, orderPlaceSuccess, updateLoading]);
+
+    useEffect(() => {
+        if (orderPlaceSuccess) {
+            toast.success("Order placed successfully");
+            navigate("/orders");
+        }
+    }, [orderPlaceSuccess, navigate]);
 
     const handleCheckout = (e) => {
         e.preventDefault();

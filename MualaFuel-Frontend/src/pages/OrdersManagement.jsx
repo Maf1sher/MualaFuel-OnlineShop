@@ -16,14 +16,20 @@ function OrdersManagement() {
 
     const handleUpdate = orderId => {
         dispatch(updateAdminOrderAction(orderId))
-            .then(() => toast.success("Order status updated"))
+            .then(() => {
+                toast.success("Order status updated");
+                dispatch(fetchAdminOrdersAction());
+            })
             .catch(() => toast.error(error));
     };
 
     const handleCancel = orderId => {
         if (window.confirm("Are you sure you want to cancel this order?")) {
             dispatch(cancelAdminOrderAction(orderId))
-                .then(() => toast.success("Order cancelled"))
+                .then(() => {
+                    toast.success("Order cancelled");
+                    dispatch(fetchAdminOrdersAction());
+                })
                 .catch(() => toast.error(error));
         }
     };

@@ -1,13 +1,14 @@
-export class LoginPage {
+import { BasePage } from './BasePage';
+
+export class LoginPage extends BasePage {
   constructor(page) {
-    this.page = page;
-    this.emailInput = page.getByLabel('Email');
-    this.passwordInput = page.getByLabel('Password');
-    this.loginButton = page.getByRole('button', { name: /Log In/i });
-    this.signUpLink = page.getByRole('link', { name: /Sign Up/i });
+    super(page);
+    this.emailInput = page.locator('#email');
+    this.passwordInput = page.locator('#password');
+    this.loginButton = page.getByRole('button', { name: 'Log In' });
   }
 
-  async goto() {
+  async navigate() {
     await this.page.goto('/login');
   }
 

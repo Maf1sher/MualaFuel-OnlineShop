@@ -1,20 +1,29 @@
-export class AdminPage {
+import { BasePage } from './BasePage';
+import { expect } from '@playwright/test';
+
+export class AdminPage extends BasePage {
   constructor(page) {
-    this.page = page;
-    this.ordersHeading = page.getByRole('heading', { name: /Admin Orders Panel/i });
+    super(page);
   }
 
-  async gotoOrders() {
+  async navigateOrders() {
     await this.page.goto('/ordersManagement');
   }
 
-  async updateOrderStatus(orderId) {
-    // Zakładając, że OrderCard ma przycisk "Update" dla wariantu admin
-    const orderCard = this.page.locator(`div`).filter({ hasText: `Order #${orderId}` });
-    await orderCard.getByRole('button', { name: /Update/i }).click();
+  async navigateEmails() {
+    await this.page.goto('/emailsHistory');
   }
 
-  async gotoEmails() {
-    await this.page.goto('/emailsHistory');
+  async changeOrderStatus(orderId) {
+    // Find the precise OrderCard using exact regex match for the ID
+    const card = this.page.getByTestId('order-card').filter({ 
+      has: this.page.locator('h2', { hasText: new RegExp(`^Order # ${orderId}$`) }) 
+    });
+    await card.getByRole('button', { name: 'Update Status' }).click();
+  }
+
+  async verifyEmailExists(recipient, subject) {
+    await expect(this.page.getByText(recipient)).toBeVisible();
+    await expect(this.page.getByText(subject)).toBeVisible();
   }
 }

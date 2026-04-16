@@ -1,28 +1,41 @@
-export class AssortmentPage {
+import { BasePage } from './BasePage';
+
+export class AssortmentPage extends BasePage {
   constructor(page) {
-    this.page = page;
-    this.nameInput = page.getByLabel('Name');
-    this.brandInput = page.getByLabel('Brand');
-    this.searchButton = page.getByRole('button', { name: /Search/i });
-    this.productCards = page.locator('.product-card'); // Fallback if no specific role
+    super(page);
+    this.nameSearchInput = page.locator('label:has-text("Name") + input');
+    this.searchButton = page.getByRole('button', { name: 'Search' });
+    this.addProductBtn = page.getByRole('button', { name: 'Add Product' });
   }
 
-  async goto() {
+  async navigate() {
     await this.page.goto('/assortment');
   }
 
-  async searchByName(name) {
-    await this.nameInput.fill(name);
+  async searchProduct(name) {
+    await this.nameSearchInput.fill(name);
     await this.searchButton.click();
   }
 
-  async getProductCard(name) {
-    // Użycie getByRole dla nagłówka wewnątrz karty produktu
-    return this.page.locator('div').filter({ has: this.page.getByRole('heading', { name: name }) });
+  async addProductToCart(productName) {
+    const card = this.page.getByTestId('product-card').filter({ hasText: productName });
+    await card.getByTestId('add-to-cart-button').click();
   }
 
-  async addToCart(productName) {
-    const card = await this.getProductCard(productName);
-    await card.getByRole('button', { name: /Add to Cart/i }).click();
+  async openProductDetails(productName) {
+    const card = this.page.getByTestId('product-card').filter({ hasText: productName });
+    await card.locator('img').first().click();
+  }
+
+  async editProduct(productName, newPrice) {
+    const card = this.page.getByTestId('product-card').filter({ hasText: productName });
+    await card.getByRole('button', { name: 'Edit' }).click();
+    await this.page.getByTestId('product-price-input').fill(newPrice.toString());
+    await this.page.getByTestId('product-form-submit-button').click();
+  }
+
+  async openAddProductForm() {
+    await this.page.getByTestId('user-menu-button').click();
+    await this.page.getByTestId('add-product-menu-item').click();
   }
 }

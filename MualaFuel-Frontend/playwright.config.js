@@ -10,18 +10,33 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:5173',
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
   },
+
   projects: [
+    { name: 'setup', testMatch: /.*\.setup\.js/ },
+
     {
-      name: 'chromium',
+      name: 'chromium-logged-in-admin',
+      use: { 
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/admin.json',
+      },
+      dependencies: ['setup'],
+      testMatch: /.*logged-in-admin.*\.spec\.js/,
+    },
+    {
+      name: 'chromium-logged-in-user',
+      use: { 
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+      testMatch: /.*logged-in-user.*\.spec\.js/,
+    },
+    {
+      name: 'chromium-guest',
       use: { ...devices['Desktop Chrome'] },
+      testIgnore: [/.*logged-in-.*\.spec\.js/, /.*\.setup\.js/],
     },
   ],
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
 });

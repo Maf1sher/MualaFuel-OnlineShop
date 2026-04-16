@@ -136,6 +136,7 @@ function Navbar() {
                         <>
                             <div className="flex flex-col">
                                 <p
+                                    data-testid={"test-id-user"}
                                     className="text-white font-bold text-lg cursor-pointer"
                                     onClick={() => navigate(`/user-profile/${auth.reqUser.nickName}`)}
                                 >
@@ -149,13 +150,18 @@ function Navbar() {
                                     }
                                 </div>
                             </div>
-                            <button onClick={toggleMenu} className="text-white text-xl focus:outline-none">
+                            <button 
+                                data-testid="user-menu-button"
+                                onClick={toggleMenu} 
+                                className="text-white text-xl focus:outline-none"
+                            >
                                 <BiDotsVerticalRounded />
                             </button>
                             {isMenuOpen && (
                                 <div className="absolute top-[7vh] right-0 mt-2 bg-[#3E2723] shadow-lg rounded w-40 flex flex-col">
                                     {auth.reqUser && Array.from(auth.reqUser.roles).some(role => role.name === "ADMIN") && (
                                         <button
+                                            data-testid="add-product-menu-item"
                                             onClick={() => {
                                                 setShowAddProductForm(true);
                                                 setMenuOpen(false);

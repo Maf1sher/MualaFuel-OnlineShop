@@ -37,7 +37,10 @@ export function ProductCard({ product }) {
 
   return (
     <>
-      <div className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
+      <div 
+        data-testid="product-card"
+        className="w-full h-full bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
+      >
         <div className="aspect-square bg-gray-100 flex items-center justify-center">
           {product.imagePath ? (
             <img
@@ -57,7 +60,7 @@ export function ProductCard({ product }) {
         </div>
         <div className="p-4 flex flex-col flex-grow">
           <div className="flex justify-between items-start mb-2">
-            <h3 className="font-semibold text-lg truncate text-[#3E2723]">{product.name}</h3>
+            <h3 data-testid="product-name" className="font-semibold text-lg truncate text-[#3E2723]">{product.name}</h3>
             <span className="bg-[#3E2723] text-white text-xs font-medium px-2 py-1 rounded">
               {product.brand}
             </span>
@@ -86,6 +89,7 @@ export function ProductCard({ product }) {
               <button
                 onClick={handleAddToCart}
                 disabled={isAdding}
+                data-testid="add-to-cart-button"
                 className={`bg-[#3E2723] ${
                   isAdding ? "cursor-not-allowed opacity-50" : "hover:bg-[#4E3423]"
                 } text-white px-3 py-1 rounded text-sm transition-colors`}

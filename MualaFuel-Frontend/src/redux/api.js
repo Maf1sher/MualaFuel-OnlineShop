@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGOUT_SUCCESS} from "./AuthService/ActionType.js";
+import {LOGIN_SUCCESS, LOGOUT_SUCCESS, REQUEST_USER_ERROR, REQUEST_USER_SUCCESS} from "./AuthService/ActionType.js";
 
 export const BASE_API_URL = "http://localhost:8080/api"
 
@@ -19,14 +19,14 @@ export const fetchWithAuth = async (url, options = {}, errorType) => {
 
 
         if (response.status === 401) {
-            window.location.href = '/login';
-            return { error: true, message: 'Unauthorized. Please log in.' };
+            localStorage.removeItem('isLoggedIn');
+            return { error: true, message: 'Unauthorized. Please log in.', status: 401 };
         }
 
         if (!response.ok) {
             const data = await response.json().catch(() => ({}));
             const msg = data.message || data.error || (data.validationErrors && data.validationErrors.join(', ')) || 'Request failed';
-            return { error: true, message: msg };
+            return { error: true, message: msg, status: response.status };
         }
 
         const contentType = response.headers.get('content-type') || '';
@@ -63,10 +63,13 @@ export const dispatchAction = async (
     try {
         const result = await fetchWithAuth(finalUrl, options, requestType);
         if (result.error) {
+            if (errorType === REQUEST_USER_ERROR || result.status === 401) {
+                localStorage.removeItem("isLoggedIn");
+                dispatch({ type: REQUEST_USER_SUCCESS, payload: null });
+            }
             dispatch({ type: errorType, payload: result.message });
             throw new Error(result.message);
         }
-        dispatch({ type: successType, payload: result });
 
         if (successType === LOGIN_SUCCESS) {
             localStorage.setItem("isLoggedIn", "1");
@@ -74,10 +77,10 @@ export const dispatchAction = async (
             localStorage.removeItem("isLoggedIn");
         }
 
+        dispatch({ type: successType, payload: result });
         return result;
     } catch (err) {
         dispatch({ type: errorType, payload: err.message });
         throw err;
     }
 };
-

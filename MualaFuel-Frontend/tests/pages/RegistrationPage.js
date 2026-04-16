@@ -1,20 +1,26 @@
-export class RegistrationPage {
+import { BasePage } from './BasePage';
+
+export class RegistrationPage extends BasePage {
   constructor(page) {
-    this.page = page;
-    this.usernameInput = page.getByLabel('Username');
-    this.emailInput = page.getByLabel('Email');
-    this.passwordInput = page.getByLabel('Password');
-    this.registerButton = page.getByRole('button', { name: /Zarejestruj|Sign Up/i });
+    super(page);
+    this.firstnameInput = page.locator('#firstname');
+    this.lastnameInput = page.locator('#lastname');
+    this.emailInput = page.locator('#email');
+    this.passwordInput = page.locator('#password');
+    this.confirmPasswordInput = page.locator('#confirmPassword');
+    this.registerButton = page.getByRole('button', { name: 'Register' });
   }
 
-  async goto() {
+  async navigate() {
     await this.page.goto('/registration');
   }
 
-  async register(username, email, password) {
-    await this.usernameInput.fill(username);
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
+  async register(user) {
+    await this.firstnameInput.fill(user.firstname);
+    await this.lastnameInput.fill(user.lastname);
+    await this.emailInput.fill(user.email);
+    await this.passwordInput.fill(user.password);
+    await this.confirmPasswordInput.fill(user.password);
     await this.registerButton.click();
   }
 }

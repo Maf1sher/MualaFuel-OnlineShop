@@ -14,7 +14,8 @@ import {
 } from "./ActionType.js";
 
 const initialValue= {
-    loading: false,
+    loading: !!localStorage.getItem('isLoggedIn'),
+    isInitialized: !localStorage.getItem('isLoggedIn'),
     error: null,
     loginResponse:null,
     registerResponse:null,
@@ -34,23 +35,23 @@ export const authReducer=(state=initialValue, {type,payload})=>{
         case LOGIN_REQUEST:
             return { ...state, loading: true, error: null, loginResponse: null, reqUser: null};
         case LOGIN_SUCCESS:
-            return { ...state, loading: false, loginResponse: payload, logoutResponse: null, reqUser: payload, };
+            return { ...state, loading: false, isInitialized: true, loginResponse: payload, logoutResponse: null, reqUser: payload, };
         case LOGIN_ERROR:
             return { ...state, loading: false, error: payload };
 
         case LOGOUT_REQUEST:
             return { ...state, loading: true, error: null };
         case LOGOUT_SUCCESS:
-            return { ...state, loading: false, logoutResponse: payload, loginResponse: null, reqUser: null};
+            return { ...state, loading: false, isInitialized: true, logoutResponse: payload, loginResponse: null, reqUser: null};
         case LOGOUT_ERROR:
             return { ...state, loading: false, error: payload };
 
         case REQUEST_USER:
             return { ...state, loading: true, error: null };
         case REQUEST_USER_SUCCESS:
-            return { ...state, loading: false, reqUser: payload };
+            return { ...state, loading: false, isInitialized: true, reqUser: payload };
         case REQUEST_USER_ERROR:
-            return { ...state, loading: false, error: payload };
+            return { ...state, loading: false, isInitialized: true, error: payload };
 
         default:
             return state;

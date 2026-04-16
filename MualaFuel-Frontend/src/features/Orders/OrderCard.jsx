@@ -2,7 +2,7 @@ import React from "react";
 
 export function OrderCard({ order, variant = "user", onUpdate, onCancel }) {
     return (
-        <div className="border rounded-lg p-4 shadow-sm">
+        <div data-testid="order-card" className="border rounded-lg p-4 shadow-sm">
             <div className="flex justify-between items-start mb-4">
                 <div>
                     <h2 className="text-xl font-semibold text-[#3E2723]">
@@ -13,7 +13,10 @@ export function OrderCard({ order, variant = "user", onUpdate, onCancel }) {
                     </p>
                 </div>
                 <div className="text-right">
-                    <p className={`font-medium ${order.status === 'PAID' ? 'text-green-600' : 'text-red-600'}`}>
+                    <p 
+                        data-testid="order-status"
+                        className={`font-medium ${order.status === 'PAID' || order.status === 'NEW' ? 'text-green-600' : 'text-red-600'}`}
+                    >
                         {order.status}
                     </p>
                     <p className="text-lg font-bold text-[#3E2723]">
