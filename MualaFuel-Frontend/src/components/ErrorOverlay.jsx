@@ -6,6 +6,7 @@ const ErrorOverlay = ({ size = 250, message = 'Something went wrong' }) => {
     const dim = typeof size === 'number' ? `${size}px` : size;
     return (
         <div
+            data-testid="error-message"
             className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-[#70593F] bg-opacity-60 p-4 text-center"
         >
             <div style={{ width: dim, height: dim }} className="mb-6">

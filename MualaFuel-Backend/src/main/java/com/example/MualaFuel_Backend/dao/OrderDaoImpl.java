@@ -31,6 +31,9 @@ public class OrderDaoImpl implements OrderDao {
                 "WHERE id = ?";
 
         try(Connection conn = ConnectionFactory.getConnection()) {
+            if (order.getAddress() == null || order.getPaymentDetails() == null || order.getUser() == null) {
+                throw new IllegalArgumentException("Order address, payment details and user must not be null");
+            }
             if(order.getId() == null) {
                 try (PreparedStatement ps = conn.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS)) {
                     ps.setBigDecimal(1, order.getTotalAmount());

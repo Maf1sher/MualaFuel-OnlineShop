@@ -41,7 +41,7 @@ public class AuthServiceImpl implements AuthService {
                 });
 
         Role role = roleDao.findByName("USER").orElseThrow(
-                () -> new RuntimeException("Role not found"));
+                () -> new CustomException(BusinessErrorCodes.NOT_FOUND));
 
         User user = User.builder()
                 .firstName(registerRequest.getFirstname())
@@ -82,7 +82,7 @@ public class AuthServiceImpl implements AuthService {
         String userName = jwtService.extractUserName(token);
 
         User user = userDao.findByEmail(userName).orElseThrow(
-                () -> new RuntimeException("User not found")
+                () -> new CustomException(BusinessErrorCodes.NOT_FOUND)
         );
         return mapper.mapTo(user);
     }

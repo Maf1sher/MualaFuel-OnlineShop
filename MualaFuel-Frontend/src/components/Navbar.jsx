@@ -90,6 +90,7 @@ function Navbar() {
                         >
                             <Link
                                 to={`/${tab.path}`}
+                                data-testid={`nav-${tab.path}`}
                                 className={`font-bold text-lg transition-colors duration-300 group-hover:text-amber-300 ${activeTab === tab.path ? "text-amber-300" : ""}`}
                             >
                                 {tab.name}
@@ -100,7 +101,7 @@ function Navbar() {
                         </li>
                     ))}
                     <li className="relative group text-white" onClick={() => { setPanelVisible(false); navigate("/cart"); }}>
-                        <FaShoppingCart className="text-2xl transition-colors duration-300 group-hover:text-amber-300 cursor-pointer" />
+                        <FaShoppingCart data-testid="nav-cart" className="text-2xl transition-colors duration-300 group-hover:text-amber-300 cursor-pointer" />
                     </li>
                 </ul>
 
@@ -110,6 +111,7 @@ function Navbar() {
                             <p className="text-white font-bold text-lg">
                                 {auth.reqUser?.firstName} {auth.reqUser?.lastName}
                             </p>
+                            <span data-testid="user-email" className="hidden">{auth.reqUser?.email}</span>
                             <div className="flex gap-2">
                                 {auth.reqUser?.roles &&
                                     Array.from(auth.reqUser.roles).map((role, id) => (
@@ -118,6 +120,7 @@ function Navbar() {
                                 }
                             </div>
                             <button
+                                data-testid="logout-button-mobile"
                                 onClick={handleLogout}
                                 className="text-white font-bold text-lg border border-white px-4 py-2 rounded"
                             >
@@ -125,7 +128,7 @@ function Navbar() {
                             </button>
                         </>
                     ) : (
-                        <div className="flex items-center" onClick={() => navigate("/login")}>
+                        <div data-testid="login-button-mobile" className="flex items-center" onClick={() => navigate("/login")}>
                             <p className="text-white font-bold text-lg cursor-pointer">Login</p>
                         </div>
                     )}
@@ -142,6 +145,7 @@ function Navbar() {
                                 >
                                     {auth.reqUser?.firstName} {auth.reqUser?.lastName}
                                 </p>
+                                <span data-testid="user-email" className="text-amber-200 text-sm">{auth.reqUser?.email}</span>
                                 <div className="flex gap-2">
                                     {auth.reqUser?.roles &&
                                         Array.from(auth.reqUser.roles).map((role, id) => (
@@ -172,6 +176,7 @@ function Navbar() {
                                         </button>
                                     )}
                                     <button
+                                        data-testid="logout-button"
                                         onClick={handleLogout}
                                         className="w-full text-center px-4 py-2 text-white hover:bg-[#4E3423]"
                                     >
@@ -181,7 +186,7 @@ function Navbar() {
                             )}
                         </>
                     ) : (
-                        <div className="flex items-center" onClick={() => navigate("/login")}>
+                        <div data-testid="login-button" className="flex items-center" onClick={() => navigate("/login")}>
                             <p className="text-white font-bold text-lg cursor-pointer">Login</p>
                         </div>
                     )}

@@ -60,9 +60,9 @@ function Cart() {
     return (
         <div className="min-h-screen p-8" style={{ backgroundColor: "#f5e9dc" }}>
             <div className="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold text-[#3E2723] mb-6">Your Shopping Cart</h2>
+                <h2 data-testid="cart-title" className="text-3xl font-bold text-[#3E2723] mb-6">Your Shopping Cart</h2>
                 {cart.items.length === 0 ? (
-                    <p className="text-gray-500 text-center">Your cart is currently empty</p>
+                    <p data-testid="empty-cart-message" className="text-gray-500 text-center">Your cart is currently empty</p>
                 ) : (
                     <>
                         <div className="space-y-4">
@@ -106,11 +106,12 @@ function Cart() {
                         <div className="mt-6 pt-4 border-t border-gray-200">
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className="text-2xl font-bold text-[#3E2723]">Total Price:</h3>
-                                <p className="text-2xl font-bold text-[#3E2723]">
+                                <p data-testid="cart-total-price" className="text-2xl font-bold text-[#3E2723]">
                                     ${cart.totalPrice.toFixed(2)}
                                 </p>
                             </div>
                             <button
+                                data-testid="checkout-button"
                                 onClick={() => setShowCheckoutForm(true)}
                                 className="w-full bg-[#3E2723] hover:bg-[#4E3423] text-white py-2 px-4 rounded transition-colors"
                             >
@@ -130,6 +131,7 @@ function Cart() {
                                 <label className="block text-gray-700 mb-2">Country</label>
                                 <input
                                     type="text"
+                                    data-testid="checkout-country-input"
                                     className="w-full p-2 border rounded"
                                     value={orderData.shippingDetails.shipping_country}
                                     onChange={(e) => setOrderData({
@@ -146,6 +148,7 @@ function Cart() {
                                 <label className="block text-gray-700 mb-2">City</label>
                                 <input
                                     type="text"
+                                    data-testid="checkout-city-input"
                                     className="w-full p-2 border rounded"
                                     value={orderData.shippingDetails.shipping_city}
                                     onChange={(e) => setOrderData({
@@ -162,6 +165,7 @@ function Cart() {
                                 <label className="block text-gray-700 mb-2">Zip Code</label>
                                 <input
                                     type="text"
+                                    data-testid="checkout-zip-input"
                                     className="w-full p-2 border rounded"
                                     value={orderData.shippingDetails.shipping_zipCode}
                                     onChange={(e) => setOrderData({
@@ -178,6 +182,7 @@ function Cart() {
                                 <label className="block text-gray-700 mb-2">Street Address</label>
                                 <input
                                     type="text"
+                                    data-testid="checkout-street-input"
                                     className="w-full p-2 border rounded"
                                     value={orderData.shippingDetails.shipping_street}
                                     onChange={(e) => setOrderData({
@@ -219,6 +224,7 @@ function Cart() {
                                 </button>
                                 <button
                                     type="submit"
+                                    data-testid="place-order-button"
                                     className="bg-[#3E2723] hover:bg-[#4E3423] text-white px-4 py-2 rounded transition-colors"
                                 >
                                     Place Order

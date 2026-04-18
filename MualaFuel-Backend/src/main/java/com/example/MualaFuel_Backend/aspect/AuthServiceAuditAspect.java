@@ -48,7 +48,7 @@ public class AuthServiceAuditAspect {
             throwing = "ex")
     public void logError(JoinPoint jp, Throwable ex) {
         String args = Arrays.stream(jp.getArgs())
-                .map(Object::toString)
+                .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         auditService.log(
                 "AUTH_SERVICE_ERROR",

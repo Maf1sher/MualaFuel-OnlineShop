@@ -24,19 +24,19 @@ public class CartController {
     @PostMapping("/items")
     public ResponseEntity<Void> addItem(@RequestBody CartRequest request) {
         cartService.addToCart(request.productId(), request.quantity());
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/items")
     public ResponseEntity<Void> updateQuantity(@RequestBody CartRequest request) {
         cartService.updateItemQuantity(request.productId(), request.quantity());
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/items/{productId}")
     public ResponseEntity<Void> removeItem(@PathVariable Long productId) {
         cartService.removeItem(productId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     public record CartRequest(Long productId, int quantity) {}

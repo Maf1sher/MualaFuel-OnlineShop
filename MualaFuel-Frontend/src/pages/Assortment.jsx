@@ -125,11 +125,15 @@ function Assortment() {
               <ErrorOverlay size={350} message={error}/>
           ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {products.map((product, index) => (
-                  <ProductCard key={index} product={product} />
-                ))}
-              </div>
+                {products.length === 0 ? (
+                    <p data-testid="no-products-message" className="text-center text-gray-500 mt-10 text-xl font-bold">Brak produktów</p>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        {products.map((product, index) => (
+                            <ProductCard key={index} product={product} />
+                        ))}
+                    </div>
+                )}
               <div className="flex justify-center items-center mt-6 space-x-4">
                 <button
                   disabled={currentPage === 0}

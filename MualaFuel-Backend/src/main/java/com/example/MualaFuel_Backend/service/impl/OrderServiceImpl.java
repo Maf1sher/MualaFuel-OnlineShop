@@ -53,9 +53,13 @@ public class OrderServiceImpl implements OrderService {
                                PaymentDetails paymentDetails,
                                Principal principal) throws MessagingException, SQLException {
 
+        if (shippingDetails == null || paymentDetails == null) {
+            throw new CustomException(BusinessErrorCodes.EMPTY_CART); // Reusing 400 status
+        }
+
         List<CartItem> cartItems = cart.getItems();
         if (cartItems.isEmpty()) {
-            throw new RuntimeException("Cannot place empty order");
+            throw new CustomException(BusinessErrorCodes.EMPTY_CART);
         }
 
         User user = userRepository.findByEmail(principal.getName()).orElseThrow(
@@ -80,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
                     .orElseThrow(() -> new CustomException(BusinessErrorCodes.NOT_FOUND));
 
             if (product.getQuantity() < cartItem.getQuantity()) {
-                throw new RuntimeException("Insufficient stock for product: " + product.getName());
+                throw new CustomException(BusinessErrorCodes.INSUFFICIENT_STOCK);
             }
 
             OrderItem orderItem = OrderItem.builder()

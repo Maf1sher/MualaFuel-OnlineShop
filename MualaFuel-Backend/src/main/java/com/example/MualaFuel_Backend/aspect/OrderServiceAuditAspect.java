@@ -58,7 +58,7 @@ public class OrderServiceAuditAspect {
             throwing = "ex")
     public void logServiceError(JoinPoint jp, Throwable ex) {
         String args = Arrays.stream(jp.getArgs())
-                .map(Object::toString)
+                .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         auditService.log(
                 "ORDER_SERVICE_ERROR",

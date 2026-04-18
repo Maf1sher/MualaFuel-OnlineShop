@@ -61,6 +61,7 @@ function ContactForm() {
                     <label htmlFor="name" className="block font-medium mb-2 text-[#3E2723]">Name</label>
                     <input
                         id="name"
+                        data-testid="contact-name-input"
                         type="text"
                         value={formValues.name}
                         onChange={handleChange}
@@ -72,6 +73,7 @@ function ContactForm() {
                     <label htmlFor="email" className="block font-medium mb-2 text-[#3E2723]">Email</label>
                     <input
                         id="email"
+                        data-testid="contact-email-input"
                         type="email"
                         value={formValues.email}
                         onChange={handleChange}
@@ -83,6 +85,7 @@ function ContactForm() {
                     <label htmlFor="subject" className="block font-medium mb-2 text-[#3E2723]">Subject</label>
                     <input
                         id="subject"
+                        data-testid="contact-subject-input"
                         type="text"
                         value={formValues.subject}
                         onChange={handleChange}
@@ -94,6 +97,7 @@ function ContactForm() {
                     <label htmlFor="message" className="block font-medium mb-2 text-[#3E2723]">Message</label>
                     <textarea
                         id="message"
+                        data-testid="contact-message-textarea"
                         value={formValues.message}
                         onChange={handleChange}
                         className="w-full p-3 border border-[#3E2723] rounded focus:outline-none focus:ring-2 focus:ring-[#3E2723]"
@@ -103,6 +107,7 @@ function ContactForm() {
                 </div>
                 <button
                     type="submit"
+                    data-testid="contact-submit-button"
                     disabled={sending}
                     className="w-full bg-[#3E2723] text-white py-3 rounded hover:bg-[#4E3423] transition-colors"
                 >

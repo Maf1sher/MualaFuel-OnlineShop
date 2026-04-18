@@ -57,7 +57,7 @@ public class EmailHistoryServiceAuditAspect {
     public void logError(JoinPoint jp, Throwable ex) {
         String args = jp.getArgs().length > 0
                 ? java.util.Arrays.stream(jp.getArgs())
-                .map(Object::toString).collect(java.util.stream.Collectors.joining(", "))
+                .map(String::valueOf).collect(java.util.stream.Collectors.joining(", "))
                 : "";
         auditService.log(
                 "EMAIL_HISTORY_SERVICE_ERROR",

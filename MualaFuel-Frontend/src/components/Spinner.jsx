@@ -6,6 +6,7 @@ const Spinner = ({ size = 300 }) => {
     const dim = typeof size === 'number' ? `${size}px` : size;
     return (
         <div
+            data-testid="spinner"
             className="absolute inset-0 z-40 flex items-center justify-center bg-[#70593F] bg-opacity-60"
         >
             <div style={{ width: dim, height: dim }}>

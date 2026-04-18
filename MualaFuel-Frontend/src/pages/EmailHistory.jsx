@@ -69,7 +69,7 @@ export function EmailHistory() {
     return (
         <div className="min-h-screen p-8" style={{ backgroundColor: '#f5e9dc' }}>
             <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6">
-                <h1 className="text-3xl font-bold text-[#3E2723] mb-4">Email History</h1>
+                <h1 data-testid="email-history-title" className="text-3xl font-bold text-[#3E2723] mb-4">Email History</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     {['recipient', 'subject'].map(field => (
@@ -116,7 +116,7 @@ export function EmailHistory() {
                     </button>
                 </div>
 
-                <table className="w-full table-auto mb-4">
+                <table data-testid="email-history-table" className="w-full table-auto mb-4">
                     <thead>
                     <tr className="bg-[#3E2723] text-white">
                         {['ID', 'Recipient', 'Subject', 'Sent At', 'Actions'].map(text => (

@@ -62,7 +62,7 @@ public class ProductServiceAuditAspect {
             throwing = "ex")
     public void logServiceError(JoinPoint jp, Throwable ex) {
         String args = Arrays.stream(jp.getArgs())
-                .map(arg -> arg != null ? arg.toString() : "null")
+                .map(String::valueOf)
                 .collect(Collectors.joining(", "));
         auditService.log(
                 "PRODUCT_SERVICE_ERROR",

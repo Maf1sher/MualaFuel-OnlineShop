@@ -4,7 +4,9 @@ import com.example.MualaFuel_Backend.dto.OrderDto;
 import com.example.MualaFuel_Backend.dto.OrderRequest;
 import com.example.MualaFuel_Backend.service.OrderService;
 import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +23,12 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<OrderDto> placeOrder(
-            @RequestBody OrderRequest request,
+            @RequestBody @Valid OrderRequest request,
             Principal principal
     ) throws SQLException, MessagingException {
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         OrderDto order = orderService.placeOrder(
                 request.shippingDetails(),
                 request.paymentDetails(),

@@ -19,9 +19,9 @@ function Orders() {
     return (
         <div className="min-h-screen p-8" style={{ backgroundColor: "#f5e9dc" }}>
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
-                <h1 className="text-3xl font-bold text-[#3E2723] mb-6">Order History</h1>
+                <h1 data-testid="order-history-title" className="text-3xl font-bold text-[#3E2723] mb-6">Order History</h1>
                 {orders.length === 0 ? (
-                    <p className="text-center text-gray-500">No orders found</p>
+                    <p data-testid="no-orders-message" className="text-center text-gray-500">No orders found</p>
                 ) : (
                     <div className="space-y-6">
                         {orders.map(order => (
